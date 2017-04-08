@@ -5,6 +5,7 @@ using namespace std;
 
 int n;
 int recursionCount = 0;
+int operationsCount = 0;
 vector<vector<vector<int> > > matrix;
 vector<int> a;
 
@@ -16,7 +17,7 @@ int maximo(int a, int b, int c) {
 }
 
 int colorearDinamicoAux( int i, int ultRojo, int ultAzul) {
-	cout << "Argumentos: i = " << i << ", ultRojo = " << ultRojo << ", ultAzul = " << ultAzul << endl;
+	
 	recursionCount++;
 	if (i == n) return 0;
 
@@ -35,7 +36,10 @@ int colorearDinamicoAux( int i, int ultRojo, int ultAzul) {
 	}
 	int resNoPinte = colorearDinamicoAux(i+1, ultRojo, ultAzul);
 
+	operationsCount++;
 	matrix[i][ultRojo][ultAzul] = maximo(resAzul, resRojo, resNoPinte);
+	cout << "Argumentos: i = " << i << ", ultRojo = " << ultRojo << ", ultAzul = " << ultAzul << endl;
+	cout << "Result: " << matrix[i][ultRojo][ultAzul] << endl;
 	return matrix[i][ultRojo][ultAzul];
 }
 
@@ -64,4 +68,5 @@ int main() {
 
 	cout << colorearDinamicoAux(0, n, n) << endl;
 	cout << "recursionCount: " << recursionCount << endl;
+	cout << "operationsCount: " << operationsCount << endl;
 }
